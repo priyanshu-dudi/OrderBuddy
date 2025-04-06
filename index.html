@@ -1,0 +1,435 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OrderBuddy - AI Voice Agent</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6fb;
+      color: #2f2f2f;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+  
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      padding: 1rem 2rem;
+    }
+  
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #4a44c5;
+    }
+  
+    .nav-link {
+      font-weight: 500;
+      color: #444;
+      transition: color 0.3s ease;
+    }
+  
+    .nav-link:hover {
+      color: #6b60ec;
+    }
+  
+    .btn-cta {
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      background: #6b60ec;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(75, 70, 234, 0.2);
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .btn-cta:hover {
+      background: #554de5;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+  
+    .hero {
+      background: linear-gradient(120deg, #6b60ec, #4a44c5);
+      color: #fff;
+      padding: 130px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+  
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+  
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      z-index: 0;
+    }
+  
+    .circle1 {
+      width: 350px;
+      height: 350px;
+      background: #ffffff;
+      top: -60px;
+      left: -60px;
+    }
+  
+    .circle2 {
+      width: 220px;
+      height: 220px;
+      background: #ffffff;
+      bottom: -40px;
+      right: -30px;
+    }
+  
+    section {
+      padding: 60px 0;
+    }
+  
+    h2, h3 {
+      color: #2b2b2b;
+    }
+  
+    .card {
+      transition: all 0.3s ease;
+      border-radius: 16px !important;
+    }
+  
+    .card:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transform: translateY(-5px);
+    }
+  
+    .card-body img {
+      transition: transform 0.3s ease;
+    }
+  
+    .card:hover .card-body img {
+      transform: scale(1.1);
+    }
+  
+    .list-unstyled li::before {
+      content: "✔ ";
+      color: #6b60ec;
+      margin-right: 6px;
+    }
+  
+    .text-muted {
+      font-size: 0.96rem;
+    }
+  
+    .lead {
+      font-weight: 400;
+      color: #555;
+    }
+  </style>
+  
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">OrderBuddy</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+      <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+      <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+      <li class="nav-item"><a class="btn btn-cta ms-3" href="#contact">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="circle circle1"></div>
+  <div class="circle circle2"></div>
+  <div class="container">
+    <h1>AI Voice Agents That Confirm Your Orders Instantly</h1>
+    <p>Boost customer experience with our smart voice assistant — available 24x7 in Hindi & English</p>
+    <a href="#pricing" class="btn btn-cta">See Pricing Plans</a>
+  </div>
+</section>
+
+<!-- End of Part 1 -->
+  
+
+
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Why Choose OrderBuddy?</h2>
+        <p class="text-muted">Powerful AI voice agents designed to boost your business efficiency</p>
+      </div>
+  
+      <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/4712/4712096.png" alt="24/7 AI" width="64" class="mb-3" />
+              <h5 class="card-title fw-semibold">24/7 Auto Calling</h5>
+              <p class="card-text text-muted">Let AI handle calls any time, any day — no breaks, no errors.</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Feature 2 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/3334/3334338.png" alt="Multi-Language" width="64" class="mb-3" />
+              <h5 class="card-title fw-semibold">Hindi + English Support</h5>
+              <p class="card-text text-muted">Reach more customers with voice support in regional languages.</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Feature 3 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/10415/10415508.png" alt="CRM Integration" width="64" class="mb-3" />
+              <h5 class="card-title fw-semibold">Order Management</h5>
+              <p class="card-text text-muted">AI confirms, logs, and reports every order — fully automated.</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Feature 4 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/9634/9634562.png" alt="Custom Voice" width="64" class="mb-3" />
+              <h5 class="card-title fw-semibold">Customizable Voices</h5>
+              <p class="card-text text-muted">Choose from male/female voice styles for your brand identity.</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Feature 5 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/753/753318.png" alt="Dashboard" width="64" class="mb-3" />
+              <h5 class="card-title fw-semibold">Live Dashboard</h5>
+              <p class="card-text text-muted">Track calls, responses, and conversions from a simple dashboard.</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Feature 6 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/9790/9790205.png" alt="Fast Setup" width="64" class="mb-3" />
+              <h5 class="card-title fw-semibold">Quick Setup</h5>
+              <p class="card-text text-muted">Get started in under 15 minutes — no coding required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+  <!-- Extended Features Section -->
+<section id="features" class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5">Built for Smart Business Communication</h2>
+        <p class="text-muted lead">OrderBuddy helps you grow with voice AI that understands, responds, and converts in real-time.</p>
+      </div>
+  
+      <!-- Feature Group 1: Voice AI Core -->
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+          <img src="https://cdn-icons-png.flaticon.com/512/10415/10415508.png" class="img-fluid" alt="Voice AI Core">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-semibold">AI Voice Agent That Sounds Human</h3>
+          <p class="text-muted">OrderBuddy uses natural voice technology to sound just like a human agent. It understands emotions, pauses naturally, and responds with clarity — giving your customers the comfort of a real conversation.</p>
+          <ul class="list-unstyled text-muted">
+            <li>✔ Emotion-aware tone</li>
+            <li>✔ Smart response to accents</li>
+            <li>✔ Background noise reduction</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Feature Group 2: Multi-Language Support -->
+      <div class="row align-items-center flex-md-row-reverse mb-5">
+        <div class="col-md-6">
+          <img src="https://cdn-icons-png.flaticon.com/512/2797/2797999.png" class="img-fluid" alt="Language Support">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-semibold">Talk to Customers in Their Own Language</h3>
+          <p class="text-muted">With built-in support for Hindi, English, and regional dialects — OrderBuddy adapts to your audience instantly. Expand across India with voice that connects.</p>
+          <ul class="list-unstyled text-muted">
+            <li>✔ Hindi & English fluency</li>
+            <li>✔ Custom language options available</li>
+            <li>✔ Regional business boost</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Feature Group 3: Live Call Handling -->
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+          <img src="https://cdn-icons-png.flaticon.com/512/3334/3334338.png" class="img-fluid" alt="Call Management">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-semibold">Automate & Handle Thousands of Calls Daily</h3>
+          <p class="text-muted">Your AI never sleeps. It confirms orders, books appointments, and answers queries — 24x7. Perfect for startups and growing businesses who need reliable voice automation.</p>
+          <ul class="list-unstyled text-muted">
+            <li>✔ Unlimited concurrent calls</li>
+            <li>✔ Auto-confirm & log orders</li>
+            <li>✔ Voice input recognition</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Feature Group 4: Dashboard & Reports -->
+      <div class="row align-items-center flex-md-row-reverse mb-5">
+        <div class="col-md-6">
+          <img src="https://cdn-icons-png.flaticon.com/512/10379/10379159.png" class="img-fluid" alt="Dashboard">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-semibold">Smart Dashboard & Daily Reports</h3>
+          <p class="text-muted">Track performance, missed calls, customer intent, and orders — all from your own mobile-friendly dashboard.</p>
+          <ul class="list-unstyled text-muted">
+            <li>✔ Real-time analytics</li>
+            <li>✔ Daily/weekly report PDF</li>
+            <li>✔ Voice logs & order tracking</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Feature Group 5: Customization -->
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+          <img src="https://cdn-icons-png.flaticon.com/512/9790/9790205.png" class="img-fluid" alt="Customization">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-semibold">Custom Voice, Scripts & Branding</h3>
+          <p class="text-muted">Use your brand name, your greeting, and your voice tone. We let you personalize everything to feel like it's truly your brand speaking.</p>
+          <ul class="list-unstyled text-muted">
+            <li>✔ Male/female voices</li>
+            <li>✔ Personalized greetings</li>
+            <li>✔ Branded responses</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Feature Group 6: Plug & Play -->
+      <div class="row align-items-center flex-md-row-reverse mb-5">
+        <div class="col-md-6">
+          <img src="https://cdn-icons-png.flaticon.com/512/9836/9836994.png" class="img-fluid" alt="Quick Setup">
+        </div>
+        <div class="col-md-6">
+          <h3 class="fw-semibold">Start in 15 Minutes — No Coding Needed</h3>
+          <p class="text-muted">We’ve built OrderBuddy so that even small business owners can launch an AI calling agent without technical skills.</p>
+          <ul class="list-unstyled text-muted">
+            <li>✔ 3-step quick setup</li>
+            <li>✔ WhatsApp onboarding</li>
+            <li>✔ Ongoing support from our team</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Pricing Section -->
+<section id="pricing" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Pricing Plans</h2>
+        <p class="text-muted">Choose a plan that fits your business needs</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <!-- Basic Plan -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Basic</h5>
+              <h6 class="card-price display-6">₹999<span class="fs-6">/mo</span></h6>
+              <ul class="list-unstyled my-4 text-muted">
+                <li>✅ 500 calls/month</li>
+                <li>✅ Hindi & English</li>
+                <li>❌ Custom Voice</li>
+                <li>❌ Dashboard Access</li>
+              </ul>
+              <a href="#contact" class="btn btn-cta w-100">Start Basic</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Pro Plan -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-lg border-primary border-2 text-center">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Pro</h5>
+              <h6 class="card-price display-6 text-primary">₹2499<span class="fs-6">/mo</span></h6>
+              <ul class="list-unstyled my-4 text-muted">
+                <li>✅ 2,000 calls/month</li>
+                <li>✅ Hindi & English</li>
+                <li>✅ Custom Voice</li>
+                <li>✅ Dashboard Access</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary w-100">Choose Pro</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Enterprise Plan -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Enterprise</h5>
+              <h6 class="card-price display-6">Custom</h6>
+              <ul class="list-unstyled my-4 text-muted">
+                <li>✅ Unlimited Calls</li>
+                <li>✅ Multi-Language</li>
+                <li>✅ Full Customization</li>
+                <li>✅ Premium Support</li>
+              </ul>
+              <a href="#contact" class="btn btn-cta w-100">Contact Sales</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
