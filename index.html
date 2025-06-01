@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OrderBuddy - AI Voice Agent</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6fb;
+      color: #2f2f2f;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+  
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+  
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #4a44c5;
+      letter-spacing: 0.04em;
+    }
+  
+    .nav-link {
+      font-weight: 500;
+      color: #444;
+      transition: color 0.3s ease;
+      font-size: 1.05rem;
+      padding: 0.5rem 1rem;
+    }
+  
+    .nav-link:hover {
+      color: #6b60ec;
+    }
+  
+    .btn-cta {
+      margin-top: 0.5rem;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      background: #6b60ec;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(107, 96, 236, 0.4);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      display: inline-block;
+    }
+  
+    .btn-cta:hover,
+    .btn-primary:hover {
+      background: #554de5;
+      box-shadow: 0 8px 24px rgba(85, 77, 229, 0.6);
+      color: #fff;
+      transform: translateY(-3px) scale(1.05);
+      text-decoration: none;
+    }
+  
+    .hero {
+      background: linear-gradient(120deg, #6b60ec, #4a44c5);
+      color: #fff;
+      padding: 140px 20px 160px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+  
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    }
+  
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.12;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite;
+    }
+  
+    .circle1 {
+      width: 350px;
+      height: 350px;
+      background: #ffffff;
+      top: -60px;
+      left: -60px;
+      animation-delay: 0s;
+    }
+  
+    .circle2 {
+      width: 220px;
+      height: 220px;
+      background: #ffffff;
+      bottom: -40px;
+      right: -30px;
+      animation-delay: 6s;
+    }
+  
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(15px);
+      }
+    }
+  
+    section {
+      padding: 60px 0;
+    }
+  
+    h2, h3 {
+      color: #2b2b2b;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+  
+    .card {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 16px !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      background: #fff;
+      cursor: default;
+      transform-style: preserve-3d;
+    }
+  
+    .card:hover {
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      transform: translateY(-10px) scale(1.03);
+      z-index: 20;
+    }
+  
+    .card-body img {
+      transition: transform 0.4s ease;
+      max-width: 64px;
+      margin-bottom: 15px;
+    }
+  
+    .card:hover .card-body img {
+      transform: scale(1.15);
+    }
+  
+    .list-unstyled li::before {
+      content: "✔ ";
+      color: #6b60ec;
+      margin-right: 6px;
+      font-weight: 700;
+    }
+  
+    .text-muted {
+      font-size: 1rem;
+      color: #666 !important;
+      line-height: 1.5;
+    }
+  
+    .lead {
+      font-weight: 400;
+      color: #555;
+      font-size: 1.15rem;
+      max-width: 850px;
+      margin: 0 auto 40px;
+      opacity: 0.9;
+    }
+
+    /* Fade-in animation classes */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      will-change: opacity, transform;
+    }
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Pricing buttons update */
+    .btn-primary {
+      background-color: #6b60ec;
+      border-color: #6b60ec;
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(107, 96, 236, 0.4);
+      transition: all 0.3s ease-in-out;
+    }
+    .btn-primary:hover {
+      background-color: #554de5;
+      border-color: #554de5;
+      box-shadow: 0 8px 24px rgba(85, 77, 229, 0.6);
+      transform: translateY(-3px) scale(1.05);
+      color: #fff;
+    }
+
+    /* Navbar toggler icon fix for bootstrap 5 */
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%284a44c5, 0.7%29' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">OrderBuddy</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav align-items-center">
+      <li class="nav-item"><a class="nav-link" href="#features-section">Features</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://rzp.io/rzp/zEfieDi">Pricing</a></li>
+      <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+      <li class="nav-item"><a class="btn btn-cta ms-3" href="https://rzp.io/rzp/zEfieDi">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero fade-in-section">
+  <div class="circle circle1"></div>
+  <div class="circle circle2"></div>
+  <div class="container">
+    <h1>AI Voice Agents That Confirm Your Orders Instantly</h1>
+    <p>Boost customer experience with our smart voice assistant — available 24x7 in Hindi & English</p>
+    <a href="https://rzp.io/rzp/zEfieDi" class="btn btn-cta">See Pricing Plans</a>
+  </div>
+</section>
+
+<!-- Add after <nav> or at the start of .hero -->
+<div class="container text-center my-3">
+  <h2 class="fw-bold" style="font-size:1.5rem; color:#4a44c5;">
+    AI Voice Agents that Engage Customers 24/7, Enhancing Your Business Efficiency.
+  </h2>
+</div>
+
+<!-- Features Section -->
+<section id="features-section" class="py-5 bg-light fade-in-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Choose OrderBuddy?</h2>
+      <p class="text-muted">Powerful AI voice agents designed to boost your business efficiency</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Feature 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712096.png" alt="24/7 AI" />
+            <h5 class="card-title fw-semibold">24/7 Auto Calling</h5>
+            <p class="card-text text-muted">Let AI handle calls any time, any day — no breaks, no errors.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/3763/3763421.png" alt="Languages" />
+            <h5 class="card-title fw-semibold">Hindi & English Support</h5>
+            <p class="card-text text-muted">Seamlessly converse in your customer's preferred language.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/1250/1250683.png" alt="Custom Voices" />
+            <h5 class="card-title fw-semibold">Custom Voice Branding</h5>
+            <p class="card-text text-muted">Personalize calls with your brand's unique voice style.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Trusted By Brands Section -->
+<section id="trusted-brands" class="py-5 fade-in-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Trusted by Small Brands Across India</h2>
+      <p class="text-muted">Our AI voice agents are making a difference for growing businesses every day</p>
+    </div>
+    <div class="row g-4 justify-content-center align-items-center text-center">
+      <div class="col-6 col-md-2">
+        <img src="https://via.placeholder.com/100x100?text=Chai+Co" alt="Chai Co" class="img-fluid rounded-circle mb-2" />
+        <p class="fw-semibold mb-0">Chai Co.</p>
+        <small class="text-muted"> Tea Chain</small>
+      </div>
+      <div class="col-6 col-md-2">
+        <img src="https://via.placeholder.com/100x100?text=Desi+Threads" alt="Desi Threads" class="img-fluid rounded-circle mb-2" />
+        <p class="fw-semibold mb-0">Desi Threads</p>
+        <small class="text-muted">Ethnic Fashion</small>
+      </div>
+      <div class="col-6 col-md-2">
+        <img src="https://via.placeholder.com/100x100?text=TechMitra" alt="TechMitra" class="img-fluid rounded-circle mb-2" />
+        <p class="fw-semibold mb-0">TechMitra</p>
+        <small class="text-muted"> IT Support</small>
+      </div>
+      <div class="col-6 col-md-2">
+        <img src="https://via.placeholder.com/100x100?text=Biryani+Box" alt="Biryani Box" class="img-fluid rounded-circle mb-2" />
+        <p class="fw-semibold mb-0">Biryani Box</p>
+        <small class="text-muted">Cloud Kitchen</small>
+      </div>
+      <div class="col-6 col-md-2">
+        <img src="https://via.placeholder.com/100x100?text=MyMed+" alt="MyMed+" class="img-fluid rounded-circle mb-2" />
+        <p class="fw-semibold mb-0">MyMed+</p>
+        <small class="text-muted">Pharmacy</small>
+      </div>
+      <div class="col-6 col-md-2">
+        <img src="https://via.placeholder.com/100x100?text=Gadget+Wala" alt="Gadget Wala" class="img-fluid rounded-circle mb-2" />
+        <p class="fw-semibold mb-0">Gadget Wala</p>
+        <small class="text-muted">Mobile Retailer</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Testimonial Section -->
+<section id="testimonials" class="py-5 bg-light fade-in-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">What People Are Saying</h2>
+      <p class="text-muted">Real feedback from our happy users</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="testimonial text-center">
+          <img src="Rohit Mehra.png" alt="Rohit Mehra" class="rounded-circle mb-3" width="90" height="90">
+          <blockquote class="blockquote">
+            <p>"Since integrating the AI voice agent, our customer engagement has soared!"</p>
+          </blockquote>
+          <p>- Rohit Mehra, CEO of Chai Co.</p>
+        </div>
+      </div>
+      <!-- Add more testimonials as needed -->
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Results Section -->
+<section id="results" class="py-5 fade-in-section">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Real Results from Real Conversations</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="bg-light rounded p-4 shadow-sm h-100">
+          <h3 class="fw-bold text-primary">80%</h3>
+          <p class="mb-1">Order Confirmation Success Rate</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-light rounded p-4 shadow-sm h-100">
+          <h3 class="fw-bold text-success">30%</h3>
+          <p class="mb-1">Reduction in COD Returns</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-light rounded p-4 shadow-sm h-100">
+          <h3 class="fw-bold text-warning">15+</h3>
+          <p class="mb-1">Hours Saved Weekly Per Agent</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-5 bg-light fade-in-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">How Our AI Voice Agent Works</h2>
+      <p class="text-muted">It’s simple, smart, and ready to talk like a pro</p>
+    </div>
+    <div class="row g-5 align-items-center">
+      <div class="col-md-6">
+        <ol class="list-group list-group-numbered">
+          <li class="list-group-item">
+            <strong>Step 1:</strong> Upload your contact list or connect to your CRM.
+          </li>
+          <li class="list-group-item">
+            <strong>Step 2:</strong> Set your call script or choose from our templates (order confirmation, appointment reminders, etc.).
+          </li>
+          <li class="list-group-item">
+            <strong>Step 3:</strong> Hit “Start Calling” — our AI will talk like a real human.
+          </li>
+          <li class="list-group-item">
+            <strong>Step 4:</strong> Get live reports on call success, user responses, and more.
+          </li>
+        </ol>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="https://via.placeholder.com/500x300?text=Voice+AI+Workflow" class="img-fluid rounded shadow" alt="How it works">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- FAQ Section -->
+<section id="faq" class="py-5 bg-light fade-in-section">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-4">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading1">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+            How does the AI voice agent work?
+          </button>
+        </h2>
+        <div id="faq1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Our AI voice agents automatically call your customers, understand their responses in Hindi or English, and confirm their orders instantly using advanced speech recognition and AI.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+            Can I customize the voice of the agent?
+          </button>
+        </h2>
+        <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Yes! Our Pro and Enterprise plans offer custom voice branding so you can personalize the voice according to your brand’s style.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading3">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+            How do I get started?
+          </button>
+        </h2>
+        <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Simply choose a plan from the pricing section and click "Get Started". We’ll guide you through the setup process and help you integrate the AI voice agents seamlessly.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo Application Section -->
+<section id="apply-demo" class="py-5 text-center fade-in-section" style="background-color: #6b60ec; color: white;">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Interested? Apply for a Free Demo</h2>
+    <a href="https://rzp.io/rzp/zEfieDi" class="btn btn-light btn-lg px-5 fw-semibold" style="border-radius: 12px;">Apply for Demo</a>
+  </div>
+</section>
+
+<!-- Metrics Section -->
+<section id="metrics" class="py-5 text-center fade-in-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="metric">
+          <h3 id="calls-made">0</h3>
+          <p>Calls Made</p>
+        </div>
+      </div>
+      <!-- Add more metrics as needed -->
+    </div>
+  </div>
+</section>
+<script>
+let count = 0;
+const target = 100000;
+const increment = target / 100;
+const interval = setInterval(() => {
+  count += increment;
+  if (count >= target) {
+    count = target;
+    clearInterval(interval);
+  }
+  document.getElementById('calls-made').innerText = Math.floor(count);
+}, 50);
+</script>
+
+<!-- Footer -->
+<footer class="py-4 text-center text-muted" style="background-color: #e3e3e3;">
+  <div class="container">
+    <div class="footer-links mb-2">
+      <a href="#about" class="mx-2">About Us</a>
+      <a href="#features-section" class="mx-2">Features</a>
+      <a href="https://rzp.io/rzp/zEfieDi" class="mx-2">Pricing</a>
+      <a href="https://rzp.io/rzp/zEfieDi" class="mx-2">Contact</a>
+    </div>
+    <div class="footer-contact mb-2">
+      <p>Email: <a href="mailto:support@orderbuddy.in">support@orderbuddy.in</a></p>
+      <p>Phone: +91-12345-67890</p>
+    </div>
+    <div class="footer-social mb-2">
+      <a href="#"><img src="facebook-icon.png" alt="Facebook" width="28"></a>
+      <a href="#"><img src="twitter-icon.png" alt="Twitter" width="28"></a>
+      <a href="#"><img src="linkedin-icon.png" alt="LinkedIn" width="28"></a>
+    </div>
+    <div class="d-flex justify-content-center align-items-center gap-3 my-2">
+      <img src="ssl-badge.png" alt="SSL Secure" height="28">
+      <img src="gdpr-badge.png" alt="GDPR Compliant" height="28">
+      <span>Trusted by 100+ Indian brands</span>
+    </div>
+    <p class="mb-0">&copy; 2025 OrderBuddy. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Fade in sections on scroll
+  const faders = document.querySelectorAll('.fade-in-section');
+
+  const appearOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) {
+        return;
+      } else {
+        entry.target.classList.add('is-visible');
+        appearOnScroll.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+</script>
+
+</body>
+</html>
