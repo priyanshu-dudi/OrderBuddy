@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://orderbuddy.org/sitemap.xml
