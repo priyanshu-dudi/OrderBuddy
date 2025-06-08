@@ -259,6 +259,25 @@
   </div>
 </section>
 
+
+<script>
+  // Only load if on your official domain
+  if (window.location.hostname === 'orderbuddy.org') {
+    const s = document.createElement('script');
+    s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
+    s.async = true;
+    s.type = "text/javascript";
+    document.head.appendChild(s);
+
+    const convai = document.createElement('elevenlabs-convai');
+    convai.setAttribute('agent-id', 'agent_01jx5matt3fv9vhmmapf5t5635');
+    document.body.appendChild(convai);
+  } else {
+    console.warn("Unauthorized domain – Convai widget not loaded.");
+  }
+</script>
+
+  
 <!-- Add after <nav> or at the start of .hero -->
 <div class="container text-center my-3">
   <h2 class="fw-bold" style="font-size:1.5rem; color:#4a44c5;">
@@ -266,6 +285,8 @@
   </h2>
 </div>
 
+
+  
 <!-- Features Section -->
 <section id="features-section" class="py-5 bg-light fade-in-section">
   <div class="container">
