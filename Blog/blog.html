@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OrderBuddy Blog</title>
+  <meta name="description" content="AI Calling Agent tips, automation tricks, and business growth hacks from OrderBuddy.">
+  <meta name="keywords" content="AI Calling Agent, OrderBuddy, Blog, Automation, Business Growth">
+  <meta name="author" content="OrderBuddy">
+  <meta property="og:title" content="OrderBuddy Blog">
+  <meta property="og:description" content="AI Calling Agent tips and business automation guides.">
+  <meta property="og:url" content="https://orderbuddy.org/blog">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    .post {
+      background: #fff;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+      text-decoration: none;
+      color: #222;
+      display: block;
+    }
+    .post:hover {
+      transform: scale(1.01);
+    }
+    .post h2 {
+      margin-top: 0;
+    }
+    footer {
+      background: #111;
+      color: #eee;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 OrderBuddy Blog</h1>
+    <p>Your source for AI automation and calling agent insights</p>
+  </header>
+
+  <div class="container" id="blogPosts">
+    <!-- Blog Posts will be injected by JS -->
+  </div>
+
+  <footer>
+    &copy; 2025 <a href="https://orderbuddy.org" style="color:#fff;">OrderBuddy.org</a>
+  </footer>
+
+  <script>
+    // 👇 Add blog entries here manually or dynamically from n8n
+    const posts = [
+      {
+        title: "Why Every Business Needs an AI Calling Agent",
+        slug: "ai-calling-agent.html",
+        date: "2025-06-16",
+        desc: "Discover why AI calling agents like OrderBuddy are revolutionizing customer service and automation.",
+      },
+      {
+        title: "5 Smart Ways to Use OrderBuddy for Sales",
+        slug: "smart-sales-tips.html",
+        date: "2025-06-15",
+        desc: "Turn every call into a closed deal with these five techniques using OrderBuddy.",
+      }
+    ];
+
+    const container = document.getElementById("blogPosts");
+    posts.forEach(post => {
+      container.innerHTML += `
+        <a href="${post.slug}" class="post">
+          <h2>${post.title}</h2>
+          <p><strong>${post.date}</strong></p>
+          <p>${post.desc}</p>
+        </a>
+      `;
+    });
+  </script>
+</body>
+</html>
