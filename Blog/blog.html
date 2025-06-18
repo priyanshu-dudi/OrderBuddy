@@ -54,14 +54,6 @@
       padding: 1rem;
       margin-top: 2rem;
     }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-      .container {
-        padding: 1rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -71,7 +63,7 @@
   </header>
 
   <div class="container" id="blogPosts">
-    <!-- Blog Posts will be injected by JS -->
+    <p>Loading latest blogs...</p>
   </div>
 
   <footer>
@@ -79,32 +71,25 @@
   </footer>
 
   <script>
-    // 👇 Add blog entries here manually or dynamically from n8n
-    const posts = [
-      {
-        title: "Why Every Business Needs an AI Calling Agent",
-        slug: "ai-calling-agent.html",
-        date: "2025-06-16",
-        desc: "Discover why AI calling agents like OrderBuddy are revolutionizing customer service and automation.",
-      },
-      {
-        title: "5 Smart Ways to Use OrderBuddy for Sales",
-        slug: "smart-sales-tips.html",
-        date: "2025-06-15",
-        desc: "Turn every call into a closed deal with these five techniques using OrderBuddy.",
-      }
-    ];
-
-    const container = document.getElementById("blogPosts");
-    posts.forEach(post => {
-      container.innerHTML += `
-        <a href="${post.slug}" class="post">
-          <h2>${post.title}</h2>
-          <p><strong>${post.date}</strong></p>
-          <p>${post.desc}</p>
-        </a>
-      `;
-    });
+    fetch('posts.json')
+      .then(res => res.json())
+      .then(posts => {
+        const container = document.getElementById("blogPosts");
+        container.innerHTML = '';
+        posts.forEach(post => {
+          container.innerHTML += `
+            <a href="${post.slug}" class="post">
+              <h2>${post.title}</h2>
+              <p><strong>${post.date}</strong></p>
+              <p>${post.desc}</p>
+            </a>
+          `;
+        });
+      })
+      .catch(err => {
+        document.getElementById("blogPosts").innerHTML = "Failed to load blogs.";
+        console.error(err);
+      });
   </script>
 </body>
 </html>
