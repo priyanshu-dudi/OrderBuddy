@@ -71,23 +71,41 @@
   </footer>
 
   <script>
-    fetch('posts.json')
+    const username = "priyanshu-dudi";
+    const repo = "orderbuddy-blog"; // Change if needed
+    const folderPath = "Blog"; // Folder where your blog .html files are stored
+    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folderPath}`;
+
+    fetch(apiUrl)
       .then(res => res.json())
-      .then(posts => {
+      .then(files => {
         const container = document.getElementById("blogPosts");
         container.innerHTML = '';
-        posts.forEach(post => {
-          container.innerHTML += `
-            <a href="${post.slug}" class="post">
-              <h2>${post.title}</h2>
-              <p><strong>${post.date}</strong></p>
-              <p>${post.desc}</p>
-            </a>
-          `;
+
+        files.forEach(file => {
+          if (file.name.endsWith(".html")) {
+            fetch(file.download_url)
+              .then(res => res.text())
+              .then(html => {
+                // Parse <title>, <meta name="description">, and date from filename
+                const title = html.match(/<title>(.*?)<\/title>/)?.[1] || file.name;
+                const desc = html.match(/<meta name="description" content="(.*?)">/)?.[1] || "No description available.";
+                const date = file.name.match(/\d{4}-\d{2}-\d{2}/)?.[0] || new Date().toISOString().slice(0, 10);
+
+                // Add blog card
+                container.innerHTML += `
+                  <a href="https://${username}.github.io/${repo}/${folderPath}/${file.name}" class="post">
+                    <h2>${title}</h2>
+                    <p><strong>${date}</strong></p>
+                    <p>${desc}</p>
+                  </a>
+                `;
+              });
+          }
         });
       })
       .catch(err => {
-        document.getElementById("blogPosts").innerHTML = "Failed to load blogs.";
+        document.getElementById("blogPosts").innerHTML = "⚠️ Failed to load blog posts.";
         console.error(err);
       });
   </script>
